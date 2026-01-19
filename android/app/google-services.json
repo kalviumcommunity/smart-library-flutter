@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "966054026115",
+    "project_id": "smart-library-s50-nextshelf",
+    "storage_bucket": "smart-library-s50-nextshelf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966054026115:android:f1857b87b7177d807434b6",
+        "android_client_info": {
+          "package_name": "com.example.smart_library_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUDBHPqlxGk5eDzrkFCFtpztpXeHmyQug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
