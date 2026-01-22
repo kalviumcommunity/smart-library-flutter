@@ -1,0 +1,377 @@
+{
+  "info": {
+    "_postman_id": "e50cba59-4b78-4ee2-bcbf-be9b0a55149f",
+    "name": "Flutter-Firebase API Documentation",
+    "description": "**Version:** 1.0.0  \n**Base URL:** [https://console.firebase.google.com/u/0/project/smart-library-s50-nextshelf/overview](https://console.firebase.google.com/u/0/project/smart-library-s50-nextshelf/overview)  \n**Auth:** Firebase Token / OAuth  \n**Updated:** 2025-11-13\n\nThis collection documents Firebase Auth flows and Firebase Firestore/Storage operations used in the Flutter app.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33706514"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Sign Up (Email/Password)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();\r",
+                  "\r",
+                  "if (json.localId) pm.environment.set(\"uid\", json.localId);\r",
+                  "if (json.idToken) pm.environment.set(\"idToken\", json.idToken);\r",
+                  "if (json.refreshToken) pm.environment.set(\"refreshToken\", json.refreshToken);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"testuser1@gmail.com\",\r\n  \"password\": \"password123\",\r\n  \"returnSecureToken\": true\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={{FIREBASE_WEB_API_KEY}}",
+              "protocol": "https",
+              "host": [
+                "identitytoolkit",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "accounts:signUp"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{FIREBASE_WEB_API_KEY}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Auth - Get Current User Info",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjA4MmU5NzVlMDdkZmE0OTYwYzdiN2I0ZmMxZDEwZjkxNmRjMmY1NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc21hcnQtbGlicmFyeS1zNTAtbmV4dHNoZWxmIiwiYXVkIjoic21hcnQtbGlicmFyeS1zNTAtbmV4dHNoZWxmIiwiYXV0aF90aW1lIjoxNzY5MDY2ODQ4LCJ1c2VyX2lkIjoiY3VlbkxvNFgxUFNyWjdwdktZWGZ3NzZOZEw0MiIsInN1YiI6ImN1ZW5MbzRYMVBTclo3cHZLWVhmdzc2TmRMNDIiLCJpYXQiOjE3NjkwNjY4NDgsImV4cCI6MTc2OTA3MDQ0OCwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInRlc3RAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.Oh2cNtO1OinRjDS3UX5kI2IAYpTDGgImZBNCU9oWdSEOHYJV7xwSGMfaOz3ArQJx0hMxvuKgtme7X3nVriTtS_mvB191BfISq9ZoWysV2ymGwXP5TxFRT-Csdpi9UKSpm_DdhsCqkyD6xn3h6NePro4n9Fad9teuYkdOdcleGqi_fuEMP9Ejj24mioDxaaVaqaQ8BqSWow8-zCgydQe-vmXbFtiHSvLPT9zOpGxx6j1rkDxW9rx_zBAUnFVY3KjKMmBDMAwz0iJmWiKNvJK3_Y8Ui-dmPPhd140y1gHAVk8GDCio_3B2w1E1FRcYGCdI3zwFSfy7Lq4oQ2eU71QEbQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": " Bearer {{idToken}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDMw8VjBT6fPc66Ndy2Vm3aJXc2dEU5dUo",
+              "protocol": "https",
+              "host": [
+                "identitytoolkit",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "accounts:lookup"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "AIzaSyDMw8VjBT6fPc66Ndy2Vm3aJXc2dEU5dUo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Auth - Login (Email/Password)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();\r",
+                  "\r",
+                  "if (json.localId) pm.environment.set(\"uid\", json.localId);\r",
+                  "if (json.idToken) pm.environment.set(\"idToken\", json.idToken);\r",
+                  "if (json.refreshToken) pm.environment.set(\"refreshToken\", json.refreshToken);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"testuser1@gmail.com\",\r\n  \"password\": \"password123\",\r\n  \"returnSecureToken\": true\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{FIREBASE_WEB_API_KEY}}",
+              "protocol": "https",
+              "host": [
+                "identitytoolkit",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "accounts:signInWithPassword"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{FIREBASE_WEB_API_KEY}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Auth - Logout (Client Side)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/logout",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            },
+            "description": "StartFragmentFirebase logout is a client-side operation. In Flutter, calling `FirebaseAuth.instance.signOut()` clears the local session.EndFragment"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Firestone",
+      "item": [
+        {
+          "name": "Firestore - Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{idToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fields\": {\r\n    \"title\": { \"stringValue\": \"Complete Docs\" },\r\n    \"description\": { \"stringValue\": \"Finish HLD + LLD + Postman\" },\r\n    \"status\": { \"stringValue\": \"pending\" },\r\n    \"isCompleted\": { \"booleanValue\": false },\r\n    \"imageUrl\": { \"stringValue\": \"\" },\r\n    \"createdAt\": { \"timestampValue\": \"2026-01-22T10:00:00Z\" },\r\n    \"updatedAt\": { \"timestampValue\": \"2026-01-22T10:00:00Z\" }\r\n  }\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://firestore.googleapis.com/v1/projects/{{PROJECT_ID}}/databases/(default)/documents/users/{{uid}}/tasks",
+              "protocol": "https",
+              "host": [
+                "firestore",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "projects",
+                "{{PROJECT_ID}}",
+                "databases",
+                "(default)",
+                "documents",
+                "users",
+                "{{uid}}",
+                "tasks"
+              ]
+            },
+            "description": "- Used in Flutter via Firestore SDK `.add()`\n    \n- Real-time sync via `.snapshots()`\n    \n- Auth user isolation by UID path"
+          },
+          "response": []
+        },
+        {
+          "name": "Firestore - Get User Tasks (List)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{idToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fields\": {\r\n    \"title\": { \"stringValue\": \"Complete Sprint 2 docs\" },\r\n    \"description\": { \"stringValue\": \"Create HLD + LLD + API docs\" },\r\n    \"status\": { \"stringValue\": \"pending\" },\r\n    \"isCompleted\": { \"booleanValue\": false },\r\n    \"imageUrl\": { \"stringValue\": \"\" },\r\n    \"createdAt\": { \"timestampValue\": \"2026-01-22T10:00:00Z\" },\r\n    \"updatedAt\": { \"timestampValue\": \"2026-01-22T10:00:00Z\" }\r\n  }\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://firestore.googleapis.com/v1/projects/{{PROJECT_ID}}/databases/(default)/documents/users/{{uid}}/tasks",
+              "protocol": "https",
+              "host": [
+                "firestore",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "projects",
+                "{{PROJECT_ID}}",
+                "databases",
+                "(default)",
+                "documents",
+                "users",
+                "{{uid}}",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Firestore - Update Task",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fields\": {\r\n    \"title\": { \"stringValue\": \"Complete Docs\" },\r\n    \"status\": { \"stringValue\": \"done\" },\r\n    \"isCompleted\": { \"booleanValue\": true },\r\n    \"updatedAt\": { \"timestampValue\": \"2026-01-22T12:00:00Z\" }\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "Firestore - Update Task",
+              "host": [
+                "Firestore - Update Task"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Firestore - Delete Task",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://firestore.googleapis.com/v1/projects/{{PROJECT_ID}}/databases/(default)/documents/users/{{uid}}/tasks/{{taskId}}",
+              "protocol": "https",
+              "host": [
+                "firestore",
+                "googleapis",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "projects",
+                "{{PROJECT_ID}}",
+                "databases",
+                "(default)",
+                "documents",
+                "users",
+                "{{uid}}",
+                "tasks",
+                "{{taskId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Storage",
+      "item": [
+        {
+          "name": "Storage - Upload Task Image",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "- Flutter uses `putFile()`\n    \n- After upload we store download URL in Firestore"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
