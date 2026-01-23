@@ -249,3 +249,18 @@ lib/
 ## ✅ Conclusion
 
 The Smart Library app demonstrates how **responsive UI design in Flutter** can deliver a scalable, performant, and user-friendly application suitable for real-world deployment across multiple platforms.
+
+
+## Responsive Home Screen
+
+This screen adapts seamlessly across phones and tablets using MediaQuery and LayoutBuilder.
+
+### Responsive Techniques Used
+```dart
+final isTablet = MediaQuery.of(context).size.width >= 600;
+
+LayoutBuilder(
+  builder: (context, constraints) {
+    return isTablet ? GridView(...) : ListView(...);
+  },
+)
