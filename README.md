@@ -114,21 +114,102 @@ These screenshots validate:
 
 ---
 
-## ⚡ Performance Architecture
+📐 Responsive & Adaptive UI Design (Flutter)
 
-### Flutter's Reactive Rendering
+To ensure the Smart Library app remains visually consistent across different screen sizes while preserving the original Figma design intent, Flutter’s responsive layout widgets were used strategically instead of fixed dimensions.
 
-Flutter uses a **declarative UI framework** with reactive rendering that ensures smooth performance:
+🧩 Flexible & Expanded
 
-* Widget tree rebuilding only for affected widgets
-* Skia & Impeller rendering engines for GPU acceleration
-* Layer compositing for complex UIs
+Used in: Book cards, list rows, action buttons, and profile sections
 
-### Dart's Async Model
+These widgets allow UI elements to share available space proportionally within Row and Column layouts.
 
-* Non-blocking asynchronous operations using `async/await`
-* Single-threaded event loop for smooth UI
-* Isolates for CPU-intensive tasks
+Prevents overflow issues on smaller screens while maintaining balanced spacing on larger devices.
+
+Why this matters:
+The Figma design specifies relative spacing rather than fixed pixel values. Flexible and Expanded translate this intent directly into Flutter by letting elements resize naturally.
+
+📱 MediaQuery
+
+Used for: Padding, font scaling, card sizes, and responsive spacing
+
+Screen dimensions are dynamically accessed using:
+
+MediaQuery.of(context).size
+
+
+Enables adaptive UI behavior for:
+
+Mobile phones
+
+Tablets
+
+Different aspect ratios
+
+Example use cases:
+
+Adjusting grid column count
+
+Scaling typography without breaking layout
+
+Maintaining consistent margins across devices
+
+Why this matters:
+Figma frames vary in size. MediaQuery ensures that UI proportions remain visually aligned with the design regardless of device resolution.
+
+🧠 LayoutBuilder
+
+Used for: Adaptive layouts in book lists, dashboards, and detail pages
+
+Determines layout behavior based on available width constraints, not just screen size.
+
+Adaptive logic example:
+
+Small width → List layout
+
+Medium width → Two-column grid
+
+Large width → Expanded grid layout
+
+Why this matters:
+This approach keeps the UI future-proof for tablets and web screens while staying faithful to the original mobile-first Figma layout.
+
+🎨 Design Consistency with Figma
+
+To preserve the original design:
+
+Spacing values were derived as percentages, not absolute pixels
+
+Text styles were mapped directly from Figma typography scales
+
+Consistent use of ThemeData for colors and fonts
+
+No hard-coded widths unless strictly necessary
+
+✅ Result
+
+By combining Flexible, Expanded, MediaQuery, and LayoutBuilder, the app:
+
+Adapts smoothly across screen sizes
+
+Avoids UI breakage and overflow
+
+Maintains Figma design proportions
+
+Delivers a consistent, modern user experience
+
+
+
+## 📱 App Screens (Planned)
+- Splash Screen  
+- Login / Register  
+- Home (Books List)  
+- Search Books  
+- Book Details  
+- Reserve Book  
+- My Reservations  
+- Borrowing Status Tracker  
+- Profile  
 
 ---
 
