@@ -27,6 +27,7 @@ class SmartLibraryApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
+        colorSchemeSeed: Colors.blue,
       ),
       home: const AuthWrapper(),
       debugShowCheckedModeBanner: false,
