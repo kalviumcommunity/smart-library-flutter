@@ -35,8 +35,8 @@ class AuthService with ChangeNotifier {
     }
   }
 
-  // Login
-  Future<String?> login(String email, String password) async {
+  // Sign in
+  Future<String?> signIn(String email, String password) async {
     _setLoading(true);
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);

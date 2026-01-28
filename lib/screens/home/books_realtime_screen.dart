@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../services/firestore_service.dart';
 import '../../widgets/book_item.dart';
@@ -13,7 +15,7 @@ class BooksRealtimeScreen extends StatefulWidget {
 class _BooksRealtimeScreenState extends State<BooksRealtimeScreen> {
   final FirestoreService _firestore = FirestoreService();
 
-  void _showAddBookDialog() {
+  void _showAddBookDialog(String uid) {
     final titleController = TextEditingController();
     final authorController = TextEditingController();
     bool isUploading = false;
@@ -85,6 +87,7 @@ class _BooksRealtimeScreenState extends State<BooksRealtimeScreen> {
                         setModalState(() => isUploading = true);
 
                         await _firestore.addBook(
+                          uid,
                           titleController.text,
                           authorController.text,
                         );
@@ -112,6 +115,9 @@ class _BooksRealtimeScreenState extends State<BooksRealtimeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+    final uid = authService.user?.uid ?? '';
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Smart Library - Discovery'),
@@ -120,7 +126,7 @@ class _BooksRealtimeScreenState extends State<BooksRealtimeScreen> {
         elevation: 0,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: _firestore.getBooksStream(),
+        stream: _firestore.getBooksStream(uid),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(child: Text('Something went wrong'));
@@ -156,14 +162,14 @@ class _BooksRealtimeScreenState extends State<BooksRealtimeScreen> {
             itemBuilder: (context, index) {
               return BookItem(
                 book: books[index],
-                onDelete: () => _firestore.deleteBook(books[index].id),
+                onDelete: () => _firestore.deleteBook(uid, books[index].id),
               );
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _showAddBookDialog,
+        onPressed: () => _showAddBookDialog(uid),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
